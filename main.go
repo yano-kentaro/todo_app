@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 
+	"github.com/yano-kentaro/todo_app/app/models"
 	"github.com/yano-kentaro/todo_app/config"
 )
 
@@ -12,6 +13,7 @@ func main() {
 
 	fmt.Println(config.Config)
 	log.Println("test")
+	fmt.Println(models.DB)
 
 	fmt.Print("\n========================================================================\n")
 }
