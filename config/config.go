@@ -3,11 +3,13 @@ package config
 import (
 	"log"
 
+	"github.com/yano-kentaro/todo_app/utils"
 	"gopkg.in/go-ini/ini.v1"
 )
 
 func init() {
 	LoadConfig()
+	utils.LogSettings(Config.LogFile)
 }
 
 type ConfigList struct {
