@@ -88,5 +88,33 @@ func GetTodos() (todos []Todo, err error) {
 		}
 		todos = append(todos, todo)
 	}
+	rows.Close()
+	return todos, err
+}
+
+//===================================================|0
+//                    Todo全件取得
+//==========================================|2022_05_01
+func (u *User) GetTodosByUser(id int) (todos []Todo, err error) {
+	sql := `
+		SELECT id, content, user_id, created_at
+		FROM todos
+		WHERE user_id = ?
+	`
+	rows, err := DB.Query(sql, u.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	for rows.Next() {
+		var todo Todo
+		err = rows.Scan(
+			&todo.ID, &todo.Content, &todo.UserID, &todo.CreatedAt,
+		)
+		if err != nil {
+			log.Fatalln(err)
+		}
+		todos = append(todos, todo)
+	}
+	rows.Close()
 	return todos, err
 }
