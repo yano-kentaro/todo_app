@@ -93,7 +93,7 @@ func GetTodos() (todos []Todo, err error) {
 }
 
 //===================================================|0
-//                    Todo全件取得
+//                    特定ユーザーのTodo取得
 //==========================================|2022_05_01
 func (u *User) GetTodosByUser(id int) (todos []Todo, err error) {
 	sql := `
@@ -128,6 +128,20 @@ func (t *Todo) UpdateTodo() (err error) {
 		WHERE id = ?
 	`
 	_, err = DB.Exec(sql, t.Content, t.UserID, t.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return err
+}
+
+//===================================================|0
+//                    Todo情報削除
+//==========================================|2022_05_01
+func (t *Todo) DeleteTodo() (err error) {
+	sql := `
+		DELETE FROM todos WHERE id = ?
+	`
+	_, err = DB.Exec(sql, t.ID)
 	if err != nil {
 		log.Fatalln(err)
 	}
