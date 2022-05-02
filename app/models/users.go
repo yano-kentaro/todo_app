@@ -1,3 +1,17 @@
+//┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//┃
+//┃──┨users.go [Ver.2022_05_01] ┃
+//┃
+//┠──┨Copyright(C) https://github.com/yano-kentaro
+//┠──┨https://www.kengineer.dev
+//┠──┨ynkn0829@gmail.com
+//┠──┨開発開始日：2022_05_01
+//┃
+//┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+//===================================================|0
+//					依存関係
+//==========================================|2022_05_01
 package models
 
 import (
@@ -5,6 +19,10 @@ import (
 	"time"
 )
 
+//===================================================|0
+//					構造体定義
+//==========================================|2022_05_01
+// Usersテーブル
 type User struct {
 	ID        int
 	UUID      string
@@ -14,15 +32,16 @@ type User struct {
 	CreatedAt time.Time
 }
 
+//===================================================|0
+//					ユーザー新規作成
+//==========================================|2022_05_01
 func (u *User) CreateUser() (err error) {
-	cmd := `insert into users(
-		uuid,
-		name,
-		email,
-		password,
-		created_at
-	) values (?,?,?,?,?)`
-	_, err = DB.Exec(cmd,
+	sql := `
+				insert into users(
+					uuid, name, email, password, created_at
+				) values (?,?,?,?,?)
+			`
+	_, err = DB.Exec(sql,
 		createUUID(),
 		u.Name,
 		u.Email,
@@ -35,14 +54,17 @@ func (u *User) CreateUser() (err error) {
 	return err
 }
 
+//===================================================|0
+//					ユーザー編集
+//==========================================|2022_05_01
 func GetUser(id int) (user User, err error) {
 	user = User{}
-	cmd := `
-		SELECT id, uuid, name, email, password, created_at
-		FROM users
-		WHERE id = ?
-	`
-	err = DB.QueryRow(cmd, id).Scan(
+	sql := `
+				SELECT id, uuid, name, email, password, created_at
+				FROM users
+				WHERE id = ?
+			`
+	err = DB.QueryRow(sql, id).Scan(
 		&user.ID,
 		&user.UUID,
 		&user.Name,

@@ -1,3 +1,17 @@
+//┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+//┃
+//┃──┨base.go [Ver.2022_05_01] ┃
+//┃
+//┠──┨Copyright(C) https://github.com/yano-kentaro
+//┠──┨https://www.kengineer.dev
+//┠──┨ynkn0829@gmail.com
+//┠──┨開発開始日：2022_05_01
+//┃
+//┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+//===================================================|0
+//					依存関係
+//==========================================|2022_05_01
 package models
 
 import (
@@ -11,37 +25,48 @@ import (
 	"github.com/yano-kentaro/todo_app/config"
 )
 
+//===================================================|0
+//					グローバル変数
+//==========================================|2022_05_01
 var DB *sql.DB
-
 var err error
 
 const (
-	tableNameUser = "users"
+	tableNameUsers = "users"
 )
 
+//===================================================|0
+//					初期化関数
+//==========================================|2022_05_01
 func init() {
 	DB, err = sql.Open(config.Config.SQLDriver, config.Config.DBName)
 	if err != nil {
 		log.Fatalln(err)
 	}
 
-	cmdU := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
+	sqlUser := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
 		id INTEGER PRIMARY KEY AUTOINCREMENT,
 		uuid STRING NOT NULL UNIQUE,
 		name STRING,
 		email STRING,
 		password STRING,
 		created_at DATETIME
-	)`, tableNameUser)
+	)`, tableNameUsers)
 
-	DB.Exec(cmdU)
+	DB.Exec(sqlUser)
 }
 
+//===================================================|0
+//					UUID作成
+//==========================================|2022_05_01
 func createUUID() (uuidObj uuid.UUID) {
 	uuidObj, _ = uuid.NewUUID()
 	return uuidObj
 }
 
+//===================================================|0
+//					暗号化関数
+//==========================================|2022_05_01
 func Encrypt(plaintext string) (cryptext string) {
 	cryptext = fmt.Sprintf("%x", sha1.Sum([]byte(plaintext)))
 	return cryptext
