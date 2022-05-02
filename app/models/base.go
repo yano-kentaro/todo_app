@@ -36,15 +36,27 @@ var err error
 // テーブル名定義
 const (
 	tableNameUsers = "users"
+	tableNameTodos = "todos"
 )
 
+//------------------------------
 // テーブル構造定義
+
+// usersテーブル
 const tableStructUsers = `
 	id INTEGER PRIMARY KEY AUTOINCREMENT,
 	uuid STRING NOT NULL UNIQUE,
 	name STRING,
 	email STRING,
 	password STRING,
+	created_at DATETIME
+`
+
+// todosテーブル
+const tableStructTodos = `
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	content TEXT,
+	user_id INTEGER,
 	created_at DATETIME
 `
 
@@ -59,6 +71,9 @@ func init() {
 
 	sqlUser := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(%s)`, tableNameUsers, tableStructUsers)
 	DB.Exec(sqlUser)
+
+	sqlTodos := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(%s)`, tableNameTodos, tableStructTodos)
+	DB.Exec(sqlTodos)
 }
 
 //===================================================|0
