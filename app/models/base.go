@@ -33,14 +33,14 @@ import (
 var DB *sql.DB
 var err error
 
-// テーブル名定義
 const (
 	tableNameUsers = "users"
 	tableNameTodos = "todos"
 )
 
-//------------------------------
-// テーブル構造定義
+//===================================================|0
+//					テーブル構造
+//==========================================|2022_05_01
 
 // usersテーブル
 const tableStructUsers = `
