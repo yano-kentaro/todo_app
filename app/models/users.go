@@ -91,3 +91,15 @@ func (u *User) UpdateUser() (err error) {
 	}
 	return err
 }
+
+//===================================================|0
+//					ユーザー情報削除
+//==========================================|2022_05_01
+func (u *User) DeleteUser() (err error) {
+	sql := `DELETE FROM users WHERE id = ?`
+	_, err = DB.Exec(sql, u.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return err
+}
