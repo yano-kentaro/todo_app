@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<base target="_top">
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900" rel="stylesheet">
+	<link href="https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css" rel="stylesheet">
+	<link href="/static/vue/css/vuetify.min.css" rel="stylesheet">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app" v-cloak>
+		<v-app>
+			<h1>{{ string }}</h1>
+		</v-app>
+	</div>
+</body>
+<script src="/static/vue/js/vue.js"></script>
+<script src="/static/vue/js/vuetify.js"></script>
+<script>
+	let vm = '';
+
+	vm = new Vue({
+		el: '#app',
+		vuetify: new Vuetify(),
+		data: () => ({
+			string: 'Hello, World'
+		}),
+		mounted: function() {
+			var string = [[.]];
+			this.string = string;
+		},
+		methods: {
+		},
+		computed: {
+		},
+	})
+</script>
+<style>
+
+</style>
+</html>
