@@ -118,3 +118,18 @@ func (u *User) GetTodosByUser(id int) (todos []Todo, err error) {
 	rows.Close()
 	return todos, err
 }
+
+//===================================================|0
+//                    Todo情報編集
+//==========================================|2022_05_01
+func (t *Todo) UpdateTodo() (err error) {
+	sql := `
+		UPDATE todos SET content = ?, user_id = ?
+		WHERE id = ?
+	`
+	_, err = DB.Exec(sql, t.Content, t.UserID, t.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return err
+}
