@@ -1,11 +1,13 @@
 //┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 //┃
-//┃──┨main.go [Ver.2022_05_01] ┃
+//┃──┨ main.go [Ver.2022_05_01] ┃
 //┃
-//┠──┨Copyright(C) https://github.com/yano-kentaro
-//┠──┨https://www.kengineer.dev
-//┠──┨ynkn0829@gmail.com
-//┠──┨開発開始日：2022_05_01
+//┠──┨ Copyright(C) https://github.com/yano-kentaro
+//┠──┨ https://www.kengineer.dev
+//┠──┨ ynkn0829@gmail.com
+//┠──┨ 開発開始日：2022_05_01
+//┃
+//┃──┨ メイン処理 ┃
 //┃
 //┗━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
