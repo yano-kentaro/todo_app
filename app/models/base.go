@@ -33,9 +33,20 @@ import (
 var DB *sql.DB
 var err error
 
+// テーブル名定義
 const (
 	tableNameUsers = "users"
 )
+
+// テーブル構造定義
+const tableStructUsers = `
+	id INTEGER PRIMARY KEY AUTOINCREMENT,
+	uuid STRING NOT NULL UNIQUE,
+	name STRING,
+	email STRING,
+	password STRING,
+	created_at DATETIME
+`
 
 //===================================================|0
 //					初期化関数
@@ -46,15 +57,7 @@ func init() {
 		log.Fatalln(err)
 	}
 
-	sqlUser := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(
-		id INTEGER PRIMARY KEY AUTOINCREMENT,
-		uuid STRING NOT NULL UNIQUE,
-		name STRING,
-		email STRING,
-		password STRING,
-		created_at DATETIME
-	)`, tableNameUsers)
-
+	sqlUser := fmt.Sprintf(`CREATE TABLE IF NOT EXISTS %s(%s)`, tableNameUsers, tableStructUsers)
 	DB.Exec(sqlUser)
 }
 
