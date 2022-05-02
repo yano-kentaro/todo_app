@@ -57,7 +57,7 @@ func (u *User) CreateUser() (err error) {
 }
 
 //===================================================|0
-//					ユーザー編集
+//					ユーザー情報取得
 //==========================================|2022_05_01
 func GetUser(id int) (user User, err error) {
 	user = User{}
@@ -78,4 +78,16 @@ func GetUser(id int) (user User, err error) {
 		log.Fatalln(err)
 	}
 	return user, err
+}
+
+//===================================================|0
+//					ユーザー情報編集
+//==========================================|2022_05_01
+func (u *User) UpdateUser() (err error) {
+	sql := `UPDATE users SET name = ?, email = ? WHERE id = ?`
+	_, err = DB.Exec(sql, u.Name, u.Email, u.ID)
+	if err != nil {
+		log.Fatalln(err)
+	}
+	return err
 }
