@@ -16,21 +16,26 @@
 package controllers
 
 import (
-	"html/template"
+	"encoding/json"
+	"fmt"
 	"log"
 	"net/http"
+
+	"github.com/yano-kentaro/todo_app/app/models"
 )
 
 //===================================================|0
 //                    "/"へのアクセス
 //==========================================|2022_05_01
 func top(w http.ResponseWriter, r *http.Request) {
-	t, err := template.
-		New("top.html").
-		Delims("[[", "]]"). // Vueのマスタッシュを機能させるため
-		ParseFiles("./app/views/templates/top.html")
+	fmt.Fprintf(w, "Welcome to the HomePage!")
+}
+
+func returnTodos(w http.ResponseWriter, r *http.Request) {
+	todos, err := models.GetTodos()
 	if err != nil {
 		log.Fatalln(err)
 	}
-	t.Execute(w, "test") // 第二引数の値をHTMLへ渡すことが出来る
+	json.NewEncoder(w).Encode(todos)
+	fmt.Println("Endpoint: /todos")
 }

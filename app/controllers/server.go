@@ -25,12 +25,29 @@ import (
 //                    メインサーバー起動
 //==========================================|2022_05_01
 func StartMainServer() (err error) {
-	// 静的ファイルの読み込み
-	files := http.FileServer(http.Dir(config.Config.Static))
-	http.Handle("/static/", http.StripPrefix("/static/", files))
-
 	// ルーティング設定
 	http.HandleFunc("/", top)
+	http.HandleFunc("/todos/", returnTodos)
 
 	return http.ListenAndServe(":"+config.Config.Port, nil)
 }
+
+// //===================================================|0
+// //                    HTML生成
+// //==========================================|2022_05_01
+// func generateHTML(w http.ResponseWriter, data interface{}, filenames ...string) {
+// 	var files []string
+// 	for _, file := range filenames {
+// 		files = append(files, fmt.Sprintf("app/views/templates/%s.html", file))
+// 	}
+// 	// var templates *template.Template
+// 	// for _, t := range files {
+// 	// 	templates = append(
+// 	// 		templates, template.New(t).Delims("[[", "]]").ParseFiles(t),
+// 	// 	)
+// 	// }
+// 	templates := template.Must(
+// 		template.New("layout").Delims("[[", "]]").ParseFiles(files...),
+// 	)
+// 	templates.ExecuteTemplate(w, "layout", data)
+// }
